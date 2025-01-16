@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .search-box {
+            margin-top: 100px;
+        }
+        input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        .results {
+            margin-top: 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+          align-items: center; /* Center items horizontally */
+           justify-content: center; /* Center items vertically */
+            }
+            .result {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Ensure all results are the same width */
+    max-width: 1000px; /* Set a max width to avoid stretching */
+    text-align: left; /* Keep text aligned to the left */
+}
+        .result a {
+            text-decoration: none;
+            color: #4285f4;
+        }
+        .result a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-box">
+        <h1>Search Engine</h1>
+        <form method="get">
+            <input type="text" name="q" placeholder="Search..." value="{{ query }}" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="results">
+        
+        {% if results %}
+            <h2>Search Results:</h2>
+            {% for result in results %}
+                <div class="result">
+                    <a href="{{ result.link }}" target="_blank">
+                        <h3>{{ result.title }}</h3>
+                    </a>
+                    <p>{{ result.snippet }}</p>
+                </div>
+            {% endfor %}
+        {% elif query %}
+            <p>No results found for "{{ query }}".</p>
+        {% endif %}
+ 
+    </div>
+</body>
+</html>
